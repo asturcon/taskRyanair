@@ -1,5 +1,5 @@
 package com.marcos.ryanair.interconnectingflights.facade;
 
-public class FlightsFinderFacade {
+public interface FlightsFinderFacade {
 
 }

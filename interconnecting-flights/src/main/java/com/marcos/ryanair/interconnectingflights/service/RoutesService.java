@@ -1,5 +1,9 @@
 package com.marcos.ryanair.interconnectingflights.service;
 
-public class RoutesService {
+import com.marcos.ryanair.interconnectingflights.model.RoutesInfo;
 
+public interface RoutesService {
+
+	public RoutesInfo getRoutes();	
+	
 }
