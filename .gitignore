@@ -1,0 +1,5 @@
+*.classpath
+*.project
+interconnecting-flights/.settings/
+interconnecting-flights/target/
+*.pdf
