@@ -4,6 +4,8 @@ import com.marcos.ryanair.interconnectingflights.model.RoutesInfo;
 
 public interface RoutesService {
 
-	public RoutesInfo getRoutes();	
+	public RoutesInfo getRoutesByDeparture();
+	
+	public RoutesInfo getRoutesByArrival();	
 	
 }

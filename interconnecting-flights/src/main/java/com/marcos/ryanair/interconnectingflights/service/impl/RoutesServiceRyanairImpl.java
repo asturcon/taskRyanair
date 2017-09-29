@@ -9,7 +9,7 @@ import com.marcos.ryanair.interconnectingflights.model.RoutesInfo;
 import com.marcos.ryanair.interconnectingflights.service.ConnectorManager;
 import com.marcos.ryanair.interconnectingflights.service.RoutesService;
 
-@Service
+@Service("routesService")
 public class RoutesServiceRyanairImpl implements RoutesService {
 
 	@Autowired
@@ -19,12 +19,20 @@ public class RoutesServiceRyanairImpl implements RoutesService {
 	private RoutesAdapter routesAdapter;
 
 	@Override
-	public RoutesInfo getRoutes() {
+	public RoutesInfo getRoutesByDeparture() {
 
 		// TODO: sacar url a properties
 		JsonNode jsonNode = connectorManager.getRestResponseAsJson("https://api.ryanair.com/core/3/routes/");			
 
-		return routesAdapter.adaptRoutesInfo(jsonNode);
+		return routesAdapter.adaptRoutesByDeparture(jsonNode);
+	}
+
+	@Override
+	public RoutesInfo getRoutesByArrival() {
+		
+		JsonNode jsonNode = connectorManager.getRestResponseAsJson("https://api.ryanair.com/core/3/routes/");
+		
+		return routesAdapter.adaptRoutesByArrival(jsonNode);
 	}
 
 }

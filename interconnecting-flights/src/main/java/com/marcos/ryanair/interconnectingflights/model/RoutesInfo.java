@@ -8,32 +8,25 @@ public class RoutesInfo implements Serializable {
 
 	private static final long serialVersionUID = -1155045573441667470L;
 
-	/**
-	 * Key -> IATA code of origin
-	 * Value -> destinations from the origin.
-	 */
-	private Map<String, Set<String>> routesByOriginMap;
+	private Map<String, Set<String>> routesByDepartureMap;
 	
-	/**
-	 * Key -> IATA code of destination
-	 * Value -> origins that go to the destination.
-	 */
-	private Map<String, Set<String>> routesByDestinationMap;
+	private Map<String, Set<String>> routesByArrivalMap;
 
-	public Map<String, Set<String>> getRoutesByOriginMap() {
-		return routesByOriginMap;
+	public Map<String, Set<String>> getRoutesByDepartureMap() {
+		return routesByDepartureMap;
 	}
 
-	public void setRoutesByOriginMap(Map<String, Set<String>> routesByOriginMap) {
-		this.routesByOriginMap = routesByOriginMap;
+	public void setRoutesByDepartureMap(Map<String, Set<String>> routesByDepartureMap) {
+		this.routesByDepartureMap = routesByDepartureMap;
 	}
 
-	public Map<String, Set<String>> getRoutesByDestinationMap() {
-		return routesByDestinationMap;
+	public Map<String, Set<String>> getRoutesByArrivalMap() {
+		return routesByArrivalMap;
 	}
 
-	public void setRoutesByDestinationMap(Map<String, Set<String>> routesByDestinationMap) {
-		this.routesByDestinationMap = routesByDestinationMap;
+	public void setRoutesByArrivalMap(Map<String, Set<String>> routesByArrivalMap) {
+		this.routesByArrivalMap = routesByArrivalMap;
 	}
-	
+
+		
 }
