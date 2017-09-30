@@ -5,21 +5,21 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.marcos.ryanair.interconnectingflights.adapter.RoutesAdapter;
-import com.marcos.ryanair.interconnectingflights.model.RoutesInfo;
-import com.marcos.ryanair.interconnectingflights.service.ConnectorManager;
+import com.marcos.ryanair.interconnectingflights.model.dto.RoutesInfoDto;
+import com.marcos.ryanair.interconnectingflights.service.RestConnectorManager;
 import com.marcos.ryanair.interconnectingflights.service.RoutesService;
 
 @Service("routesService")
 public class RoutesServiceRyanairImpl implements RoutesService {
 
 	@Autowired
-	private ConnectorManager connectorManager;
+	private RestConnectorManager connectorManager;
 	
 	@Autowired
 	private RoutesAdapter routesAdapter;
 
 	@Override
-	public RoutesInfo getRoutesByDeparture() {
+	public RoutesInfoDto getRoutesByDeparture() {
 
 		// TODO: sacar url a properties
 		JsonNode jsonNode = connectorManager.getRestResponseAsJson("https://api.ryanair.com/core/3/routes/");			
@@ -28,7 +28,7 @@ public class RoutesServiceRyanairImpl implements RoutesService {
 	}
 
 	@Override
-	public RoutesInfo getRoutesByArrival() {
+	public RoutesInfoDto getRoutesByArrival() {
 		
 		JsonNode jsonNode = connectorManager.getRestResponseAsJson("https://api.ryanair.com/core/3/routes/");
 		

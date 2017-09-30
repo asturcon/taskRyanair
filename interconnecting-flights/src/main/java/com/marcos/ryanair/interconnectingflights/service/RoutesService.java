@@ -1,11 +1,11 @@
 package com.marcos.ryanair.interconnectingflights.service;
 
-import com.marcos.ryanair.interconnectingflights.model.RoutesInfo;
+import com.marcos.ryanair.interconnectingflights.model.dto.RoutesInfoDto;
 
 public interface RoutesService {
 
-	public RoutesInfo getRoutesByDeparture();
+	public RoutesInfoDto getRoutesByDeparture();
 	
-	public RoutesInfo getRoutesByArrival();	
+	public RoutesInfoDto getRoutesByArrival();	
 	
 }

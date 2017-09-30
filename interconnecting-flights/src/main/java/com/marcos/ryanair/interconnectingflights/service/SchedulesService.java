@@ -1,7 +1,9 @@
 package com.marcos.ryanair.interconnectingflights.service;
 
+import com.marcos.ryanair.interconnectingflights.model.dto.SchedulesInfoDto;
+
 public interface SchedulesService {
 
-	public void getRouteSchedule(String departure, String arrival, int year, int month);
-	
+	public SchedulesInfoDto getFlightsSchedule(String departure, String arrival, int year, int month);
+
 }

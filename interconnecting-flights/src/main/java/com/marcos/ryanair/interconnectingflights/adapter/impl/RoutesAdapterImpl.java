@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.marcos.ryanair.interconnectingflights.adapter.RoutesAdapter;
-import com.marcos.ryanair.interconnectingflights.model.RoutesInfo;
+import com.marcos.ryanair.interconnectingflights.model.dto.RoutesInfoDto;
 
 @Component("routesAdapter")
 public class RoutesAdapterImpl implements RoutesAdapter {
@@ -18,7 +18,7 @@ public class RoutesAdapterImpl implements RoutesAdapter {
 	private static final String AIRPORT_TO_ATTR = "airportTo";
 
 	@Override
-	public RoutesInfo adaptRoutesByDeparture(JsonNode json) {
+	public RoutesInfoDto adaptRoutesByDeparture(JsonNode json) {
 
 		Map<String, Set<String>> destinationsByOriginMap = new HashMap<>();
 
@@ -36,14 +36,14 @@ public class RoutesAdapterImpl implements RoutesAdapter {
 
 		}
 
-		RoutesInfo routesInfo = new RoutesInfo();
+		RoutesInfoDto routesInfo = new RoutesInfoDto();
 		routesInfo.setRoutesByDepartureMap(destinationsByOriginMap);
 
 		return routesInfo;
 	}
 
 	@Override
-	public RoutesInfo adaptRoutesByArrival(JsonNode json) {
+	public RoutesInfoDto adaptRoutesByArrival(JsonNode json) {
 		
 		Map<String, Set<String>> originsByDestinationMap = new HashMap<>();
 
@@ -61,7 +61,7 @@ public class RoutesAdapterImpl implements RoutesAdapter {
 
 		}
 
-		RoutesInfo routesInfo = new RoutesInfo();
+		RoutesInfoDto routesInfo = new RoutesInfoDto();
 		routesInfo.setRoutesByArrivalMap(originsByDestinationMap);
 
 		return routesInfo;

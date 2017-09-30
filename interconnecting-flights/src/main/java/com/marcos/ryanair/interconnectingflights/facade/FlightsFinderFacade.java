@@ -1,9 +1,12 @@
 package com.marcos.ryanair.interconnectingflights.facade;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+
+import com.marcos.ryanair.interconnectingflights.model.FlightsInfo;
 
 public interface FlightsFinderFacade {
 
-	public void findFlights(String departure, String arrival, Date departureDateTime, Date arrivalDateTime);
-	
+	public FlightsInfo findFlights(String departure, String arrival, LocalDateTime departureDateTime,
+			LocalDateTime arrivalDateTime, int maxStops);
+
 }

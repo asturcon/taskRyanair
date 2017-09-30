@@ -8,11 +8,11 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.marcos.ryanair.interconnectingflights.model.RoutesInfo;
+import com.marcos.ryanair.interconnectingflights.model.dto.RouteDto;
+import com.marcos.ryanair.interconnectingflights.model.dto.RoutesInfoDto;
 import com.marcos.ryanair.interconnectingflights.service.RoutesService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -25,14 +25,14 @@ public class RoutesHelperTest {
 	@Test
 	public void routesHelperTest1Stop() {
 
-		RoutesInfo routesInfoByDeparture = routesService.getRoutesByDeparture();
-		RoutesInfo routesInfoByArrival = routesService.getRoutesByArrival();
+		RoutesInfoDto routesInfoByDeparture = routesService.getRoutesByDeparture();
+		RoutesInfoDto routesInfoByArrival = routesService.getRoutesByArrival();
 
 		String departure = "STN";
 		String arrival = "WRO";
 		int maxStops = 1;
 
-		Map<Integer, List<List<String>>> routes = RoutesHelper.findFlightsWithStops(routesInfoByDeparture, departure,
+		Map<Integer, List<RouteDto>> routes = RoutesHelper.findFlightsWithStops(routesInfoByDeparture, departure,
 				arrival, maxStops);
 
 		System.out.println(routes);
@@ -53,13 +53,13 @@ public class RoutesHelperTest {
 	@Test
 	public void routesHelperTestDirect(){
 		
-		RoutesInfo routesInfoByDeparture = routesService.getRoutesByDeparture();
+		RoutesInfoDto routesInfoByDeparture = routesService.getRoutesByDeparture();
 
 		String departure = "STN";
 		String arrival = "WRO";
 		int maxStops = 0;
 
-		Map<Integer, List<List<String>>> routes = RoutesHelper.findFlightsWithStops(routesInfoByDeparture, departure,
+		Map<Integer, List<RouteDto>> routes = RoutesHelper.findFlightsWithStops(routesInfoByDeparture, departure,
 				arrival, maxStops);
 
 		System.out.println(routes);
