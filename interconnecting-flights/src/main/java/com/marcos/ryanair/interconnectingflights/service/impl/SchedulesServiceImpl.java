@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import com.marcos.ryanair.interconnectingflights.model.Flight;
 import com.marcos.ryanair.interconnectingflights.model.Leg;
 import com.marcos.ryanair.interconnectingflights.model.Route;
+import com.marcos.ryanair.interconnectingflights.model.dto.ComparatorFlightScheduleDtoByArrivalDateTime;
 import com.marcos.ryanair.interconnectingflights.model.dto.FlightScheduleDto;
 import com.marcos.ryanair.interconnectingflights.model.dto.SchedulesDto;
 import com.marcos.ryanair.interconnectingflights.provider.SchedulesDataProvider;
@@ -118,16 +119,16 @@ public class SchedulesServiceImpl implements SchedulesService {
 	}
 
 	// TODO: utils
-	private NavigableSet<FlightScheduleDto> headSetRangeSafeWithSetComparator(
-			NavigableSet<FlightScheduleDto> setToCheck, FlightScheduleDto dtoFilter) {
+	private NavigableSet<FlightScheduleDto> headSetRangeSafe(NavigableSet<FlightScheduleDto> setToCheck,
+			FlightScheduleDto dtoFilter, Comparator<FlightScheduleDto> comparator) {
 
 		if (setToCheck == null || setToCheck.isEmpty()) {
 			return new TreeSet<>();
 		}
 
-		if (setToCheck.comparator().compare(dtoFilter, setToCheck.first()) <= 0) {
+		if (comparator.compare(dtoFilter, setToCheck.first()) <= 0) {
 			return new TreeSet<>();
-		} else if (setToCheck.comparator().compare(dtoFilter, setToCheck.last()) > 0) {
+		} else if (comparator.compare(dtoFilter, setToCheck.last()) > 0) {
 			return setToCheck;
 		} else {
 			return setToCheck.headSet(dtoFilter, true);
@@ -174,37 +175,15 @@ public class SchedulesServiceImpl implements SchedulesService {
 		NavigableSet<FlightScheduleDto> flightsDepartureOnTime = tailSetRangeSafe(totalFlights, departureAuxDto);
 
 		// get flights than arrive not later than arrival time
-		NavigableSet<FlightScheduleDto> totalFlightsComparatorByArrival = new TreeSet<>(
-				new Comparator<FlightScheduleDto>() {
-
-					@Override
-					public int compare(FlightScheduleDto o1, FlightScheduleDto o2) {
-						if (o1 == o2) {
-							return 0;
-						} else if (o1 == null) {
-							return -1;
-						} else if (o2 == null) {
-							return 1;
-						} else {
-							if (o1.getArrivalDateTime() == null && o2.getArrivalDateTime() == null) {
-								return 0;
-							} else if (o1.getArrivalDateTime() == null) {
-								return -1;
-							} else if (o2.getArrivalDateTime() == null) {
-								return 1;
-							} else {
-								return o1.getArrivalDateTime().compareTo(o2.getArrivalDateTime());
-							}
-						}
-					}
-				});
+		ComparatorFlightScheduleDtoByArrivalDateTime comparatorByArrival = new ComparatorFlightScheduleDtoByArrivalDateTime();
+		NavigableSet<FlightScheduleDto> totalFlightsComparatorByArrival = new TreeSet<>(comparatorByArrival);
 
 		totalFlightsComparatorByArrival.addAll(totalFlights);
 
 		FlightScheduleDto arrivalAuxDto = new FlightScheduleDto();
 		arrivalAuxDto.setArrivalDateTime(arrivalDateTime);
-		NavigableSet<FlightScheduleDto> flightsArrivalOnTime = headSetRangeSafeWithSetComparator(
-				totalFlightsComparatorByArrival, arrivalAuxDto);
+		NavigableSet<FlightScheduleDto> flightsArrivalOnTime = headSetRangeSafe(totalFlightsComparatorByArrival,
+				arrivalAuxDto, comparatorByArrival);
 
 		flightsDepartureOnTime.retainAll(flightsArrivalOnTime);
 
