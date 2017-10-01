@@ -1,8 +1,9 @@
-package com.marcos.ryanair.interconnectingflights.service;
+package com.marcos.ryanair.interconnectingflights.provider;
 
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.marcos.ryanair.interconnectingflights.provider.exception.RestConnectionException;
 
 /**
  * Defines a manager to connect to REST WS.
@@ -18,8 +19,9 @@ public interface RestConnectorManager {
 	 * @param url
 	 *            url of the request.
 	 * @return {@link JsonNode} with the response.
+	 * @throws RestConnectionException
 	 */
-	public JsonNode getRestResponseAsJson(String url);
+	public JsonNode getRestResponseAsJson(String url) throws RestConnectionException;
 
 	/**
 	 * Gets the response from a rest ws as JSON. It receives the parameters in a
@@ -30,7 +32,8 @@ public interface RestConnectorManager {
 	 * @param parameters
 	 *            map with the name of the parameters and their values.
 	 * @return {@link JsonNode} with the response.
+	 * @throws RestConnectionException
 	 */
-	public JsonNode getRestResponseAsJson(String url, Map<String, String> parameters);
+	public JsonNode getRestResponseAsJson(String url, Map<String, String> parameters) throws RestConnectionException;
 
 }

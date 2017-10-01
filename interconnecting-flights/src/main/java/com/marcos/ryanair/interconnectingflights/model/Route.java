@@ -1,10 +1,10 @@
-package com.marcos.ryanair.interconnectingflights.model.dto;
+package com.marcos.ryanair.interconnectingflights.model;
 
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
-public class RouteDto implements Serializable {
+public class Route implements Serializable {
 
 	private static final long serialVersionUID = 3897681433236316147L;
 

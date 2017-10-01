@@ -1,50 +1,39 @@
 package com.marcos.ryanair.interconnectingflights.model;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Flight implements Serializable {
 
-	private static final long serialVersionUID = -8887400840876314320L;
+	private static final long serialVersionUID = -7859814014524128149L;
 
-	private String departureAirport;
-	
-	private String arrivalAirport;
-	
-	private LocalDateTime departureTime;
-	
-	private LocalDateTime arrivalTime;
+	private List<Leg> legs;
 
-	public String getDepartureAirport() {
-		return departureAirport;
+	private int stops;
+
+	public int getStops() {
+		return stops;
 	}
 
-	public void setDepartureAirport(String departureAirport) {
-		this.departureAirport = departureAirport;
+	public void setStops(int stops) {
+		this.stops = stops;
 	}
 
-	public String getArrivalAirport() {
-		return arrivalAirport;
+	public List<Leg> getLegs() {
+		return legs;
 	}
 
-	public void setArrivalAirport(String arrivalAirport) {
-		this.arrivalAirport = arrivalAirport;
-	}
-
-	public LocalDateTime getDepartureTime() {
-		return departureTime;
-	}
-
-	public void setDepartureTime(LocalDateTime departureTime) {
-		this.departureTime = departureTime;
-	}
-
-	public LocalDateTime getArrivalTime() {
-		return arrivalTime;
-	}
-
-	public void setArrivalTime(LocalDateTime arrivalTime) {
-		this.arrivalTime = arrivalTime;
+	protected void setLegs(List<Leg> legs) {
+		this.legs = legs;
 	}
 	
+	public void addLeg(Leg leg) {
+		if (legs == null) {
+			legs = new ArrayList<>();
+		}
+		
+		legs.add(leg);
+	}
+
 }

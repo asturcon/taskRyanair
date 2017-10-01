@@ -1,9 +1,17 @@
 package com.marcos.ryanair.interconnectingflights.service;
 
-import com.marcos.ryanair.interconnectingflights.model.dto.SchedulesInfoDto;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.util.List;
+
+import com.marcos.ryanair.interconnectingflights.model.Flight;
+import com.marcos.ryanair.interconnectingflights.model.Route;
 
 public interface SchedulesService {
 
-	public SchedulesInfoDto getFlightsSchedule(String departure, String arrival, int year, int month);
+	// TODO: make it for any number of stops
+	
+	public List<Flight> findRouteFlightsMax1Stop(Route routeDto, LocalDateTime departureDateTime,
+			LocalDateTime arrivalDateTime, Duration minTimeStop);
 
 }

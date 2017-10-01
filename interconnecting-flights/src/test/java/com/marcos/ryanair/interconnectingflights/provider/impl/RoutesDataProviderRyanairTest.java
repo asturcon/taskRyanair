@@ -1,4 +1,4 @@
-package com.marcos.ryanair.interconnectingflights.service.impl;
+package com.marcos.ryanair.interconnectingflights.provider.impl;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -8,19 +8,19 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.marcos.ryanair.interconnectingflights.model.dto.RoutesInfoDto;
-import com.marcos.ryanair.interconnectingflights.service.RoutesService;
+import com.marcos.ryanair.interconnectingflights.provider.RoutesDataProvider;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "/test-beans.xml" })
-public class RoutesServiceRyanairImplTest {
+public class RoutesDataProviderRyanairTest {
 
 	@Autowired
-	private RoutesService routesService;
+	private RoutesDataProvider routesDataProvider;
 
 	@Test
 	public void getRoutesByDepartureTest(){
 		
-		RoutesInfoDto routesInfo = routesService.getRoutesByDeparture();
+		RoutesInfoDto routesInfo = routesDataProvider.getRoutesGroupedByDeparture();
 		
 		Assert.assertEquals(true, !routesInfo.getRoutesByDepartureMap().isEmpty());				
 	}

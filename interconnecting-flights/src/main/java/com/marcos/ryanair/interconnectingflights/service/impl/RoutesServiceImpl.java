@@ -1,4 +1,4 @@
-package com.marcos.ryanair.interconnectingflights.helpers;
+package com.marcos.ryanair.interconnectingflights.service.impl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,19 +6,38 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.marcos.ryanair.interconnectingflights.model.dto.RouteDto;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.marcos.ryanair.interconnectingflights.model.Route;
 import com.marcos.ryanair.interconnectingflights.model.dto.RoutesInfoDto;
+import com.marcos.ryanair.interconnectingflights.provider.RoutesDataProvider;
+import com.marcos.ryanair.interconnectingflights.provider.exception.DataProviderException;
+import com.marcos.ryanair.interconnectingflights.service.RoutesService;
+import com.marcos.ryanair.interconnectingflights.service.exception.ServiceException;
 
-public final class RoutesHelper {
+@Service("routesService")
+public final class RoutesServiceImpl implements RoutesService {
 
-	public final static Map<Integer, List<RouteDto>> findFlightsWithStops(RoutesInfoDto routesInfo, String departure,
-			String arrival, int maxStops) {
+	@Autowired
+	private RoutesDataProvider routesService;
+
+	@Override
+	public Map<Integer, List<Route>> findFlightsWithStops(String departure, String arrival, int maxStops)
+			throws ServiceException {
+
+		RoutesInfoDto routesInfo;
+		try {
+			routesInfo = routesService.getRoutesGroupedByDeparture();
+		} catch (DataProviderException ex) {
+			throw new ServiceException("Could not get routes", ex);
+		}
 
 		int stops = 0;
 		/**
 		 * Key -> number of stops. Value -> routes
 		 */
-		Map<Integer, List<RouteDto>> allRoutes = new HashMap<>();
+		Map<Integer, List<Route>> allRoutes = new HashMap<>();
 
 		findFlightsWithStopsRecursive(routesInfo, departure, arrival, stops, maxStops, new ArrayList<>(), allRoutes);
 
@@ -26,7 +45,7 @@ public final class RoutesHelper {
 	}
 
 	private static void findFlightsWithStopsRecursive(RoutesInfoDto routesInfo, String departure, String arrival,
-			int stops, int maxStops, List<String> route, Map<Integer, List<RouteDto>> allRoutes) {
+			int stops, int maxStops, List<String> route, Map<Integer, List<Route>> allRoutes) {
 
 		// get destinations of the current departure airport.
 		Set<String> destinations = routesInfo.getRoutesByDepartureMap().get(departure);
@@ -56,14 +75,14 @@ public final class RoutesHelper {
 	/**
 	 * Adds a route to the routes by stops map.
 	 */
-	private static void addRoute(List<String> route, Map<Integer, List<RouteDto>> allRoutes, int stops) {
-		List<RouteDto> routesStop = allRoutes.get(stops);
+	private static void addRoute(List<String> route, Map<Integer, List<Route>> allRoutes, int stops) {
+		List<Route> routesStop = allRoutes.get(stops);
 		if (routesStop == null) {
 			routesStop = new ArrayList<>();
 			allRoutes.put(stops, routesStop);
 		}
-		
-		RouteDto routeDto = new RouteDto();
+
+		Route routeDto = new Route();
 		routeDto.setAirports(route);
 
 		routesStop.add(routeDto);

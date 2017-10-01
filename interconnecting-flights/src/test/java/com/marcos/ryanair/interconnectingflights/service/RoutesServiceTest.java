@@ -1,4 +1,4 @@
-package com.marcos.ryanair.interconnectingflights.helpers;
+package com.marcos.ryanair.interconnectingflights.service;
 
 import java.util.List;
 import java.util.Map;
@@ -11,33 +11,36 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.marcos.ryanair.interconnectingflights.model.dto.RouteDto;
+import com.marcos.ryanair.interconnectingflights.model.Route;
 import com.marcos.ryanair.interconnectingflights.model.dto.RoutesInfoDto;
+import com.marcos.ryanair.interconnectingflights.provider.RoutesDataProvider;
 import com.marcos.ryanair.interconnectingflights.service.RoutesService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "/test-beans.xml" })
-public class RoutesHelperTest {
+public class RoutesServiceTest {
 
 	@Autowired
 	private RoutesService routesService;
 
+	@Autowired
+	private RoutesDataProvider routesDataProvider;
+
 	@Test
 	public void routesHelperTest1Stop() {
-
-		RoutesInfoDto routesInfoByDeparture = routesService.getRoutesByDeparture();
-		RoutesInfoDto routesInfoByArrival = routesService.getRoutesByArrival();
 
 		String departure = "STN";
 		String arrival = "WRO";
 		int maxStops = 1;
 
-		Map<Integer, List<RouteDto>> routes = RoutesHelper.findFlightsWithStops(routesInfoByDeparture, departure,
-				arrival, maxStops);
+		Map<Integer, List<Route>> routes = routesService.findFlightsWithStops(departure, arrival, maxStops);
 
 		System.out.println(routes);
 
 		// calculate the possible values semi-manually to test it
+		RoutesInfoDto routesInfoByDeparture = routesDataProvider.getRoutesGroupedByDeparture();
+		RoutesInfoDto routesInfoByArrival = routesDataProvider.getRoutesGroupedByArrival();
+
 		Set<String> destinationsFromOrigin = routesInfoByDeparture.getRoutesByDepartureMap().get(departure);
 		Set<String> originsToDestination = routesInfoByArrival.getRoutesByArrivalMap().get(arrival);
 
@@ -51,16 +54,13 @@ public class RoutesHelperTest {
 	}
 
 	@Test
-	public void routesHelperTestDirect(){
-		
-		RoutesInfoDto routesInfoByDeparture = routesService.getRoutesByDeparture();
+	public void routesHelperTestDirect() {
 
 		String departure = "STN";
 		String arrival = "WRO";
 		int maxStops = 0;
 
-		Map<Integer, List<RouteDto>> routes = RoutesHelper.findFlightsWithStops(routesInfoByDeparture, departure,
-				arrival, maxStops);
+		Map<Integer, List<Route>> routes = routesService.findFlightsWithStops(departure, arrival, maxStops);
 
 		System.out.println(routes);
 

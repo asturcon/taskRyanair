@@ -8,6 +8,9 @@ public class FlightsInfo implements Serializable {
 
 	private static final long serialVersionUID = 4843337507789973590L;
 
+	/**
+	 * key -> number of stops, value -> available flights
+	 */
 	private Map<Integer, List<Flight>> interconnectingFlights;
 
 	public Map<Integer, List<Flight>> getInterconnectingFlights() {
@@ -16,6 +19,6 @@ public class FlightsInfo implements Serializable {
 
 	public void setInterconnectingFlights(Map<Integer, List<Flight>> interconnectingFlights) {
 		this.interconnectingFlights = interconnectingFlights;
-	}		
-	
+	}
+
 }

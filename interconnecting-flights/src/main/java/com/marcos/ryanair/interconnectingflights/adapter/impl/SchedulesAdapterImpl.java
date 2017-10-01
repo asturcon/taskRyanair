@@ -1,42 +1,43 @@
 package com.marcos.ryanair.interconnectingflights.adapter.impl;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.marcos.ryanair.interconnectingflights.adapter.SchedulesAdapter;
 import com.marcos.ryanair.interconnectingflights.model.dto.FlightScheduleDto;
-import com.marcos.ryanair.interconnectingflights.model.dto.SchedulesInfoDto;
+import com.marcos.ryanair.interconnectingflights.model.dto.SchedulesDto;
 
 @Component("schedulesAdapter")
 public class SchedulesAdapterImpl implements SchedulesAdapter {
 
 	@Override
-	public SchedulesInfoDto adaptSchedules(JsonNode jsonNode) {
+	public SchedulesDto adaptSchedules(JsonNode jsonNode, int year) {
 
-		SchedulesInfoDto schedulesInfo = new SchedulesInfoDto();
-		Map<Integer, Map<Integer, List<FlightScheduleDto>>> schedules = new HashMap<>();
-		schedulesInfo.setSchedules(schedules);
+		SchedulesDto schedulesInfo = new SchedulesDto();
+		SortedSet<FlightScheduleDto> flights = new TreeSet<>();
+		schedulesInfo.setFlights(flights);
 
-		Integer month = jsonNode.get("month").asInt();
-		Map<Integer, List<FlightScheduleDto>> daysMap = new HashMap<>();
-		schedules.put(month, daysMap);
-
+		int month = jsonNode.get("month").asInt();
 		for (JsonNode dayElement : jsonNode.get("days")) {
-			Integer day = dayElement.get("day").asInt();
-			List<FlightScheduleDto> fligths = new ArrayList<>();
-			daysMap.put(day, fligths);
+			for (JsonNode flightElement : dayElement.get("flights")) {				
+				int day = dayElement.get("day").asInt();
 
-			for (JsonNode flightElement : dayElement.get("flights")) {
+				LocalDateTime departureDateTime = LocalDateTime.of(LocalDate.of(year, month, day),
+						LocalTime.parse(flightElement.get("departureTime").asText()));				
+				LocalDateTime arrivalDateTime = LocalDateTime.of(LocalDate.of(year, month, day),
+						LocalTime.parse(flightElement.get("arrivalTime").asText()));
+
 				FlightScheduleDto flightSchedule = new FlightScheduleDto();
-				flightSchedule.setDepartureTime(LocalTime.parse(flightElement.get("departureTime").asText()));
-				flightSchedule.setArrivalTime(LocalTime.parse(flightElement.get("arrivalTime").asText()));
-				fligths.add(flightSchedule);
+				flightSchedule.setDepartureDateTime(departureDateTime);
+				flightSchedule.setArrivalDateTime(arrivalDateTime);
+				
+				flights.add(flightSchedule);
 			}
 		}
 
