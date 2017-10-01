@@ -8,8 +8,8 @@ import com.marcos.ryanair.interconnectingflights.adapter.RoutesAdapter;
 import com.marcos.ryanair.interconnectingflights.model.dto.RoutesInfoDto;
 import com.marcos.ryanair.interconnectingflights.provider.RestConnectorManager;
 import com.marcos.ryanair.interconnectingflights.provider.RoutesDataProvider;
-import com.marcos.ryanair.interconnectingflights.provider.exception.RestConnectionException;
 import com.marcos.ryanair.interconnectingflights.provider.exception.DataProviderException;
+import com.marcos.ryanair.interconnectingflights.provider.exception.RestConnectionException;
 
 @Service("routesDataProvider")
 public class RoutesDataProviderRyanair implements RoutesDataProvider {

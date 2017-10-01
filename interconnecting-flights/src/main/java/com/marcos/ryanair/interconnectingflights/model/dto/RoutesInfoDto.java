@@ -4,12 +4,18 @@ import java.io.Serializable;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * DTO for routes information.
+ * 
+ * @author mlg
+ *
+ */
 public class RoutesInfoDto implements Serializable {
 
 	private static final long serialVersionUID = -1155045573441667470L;
 
 	private Map<String, Set<String>> routesByDepartureMap;
-	
+
 	private Map<String, Set<String>> routesByArrivalMap;
 
 	public Map<String, Set<String>> getRoutesByDepartureMap() {
@@ -28,5 +34,4 @@ public class RoutesInfoDto implements Serializable {
 		this.routesByArrivalMap = routesByArrivalMap;
 	}
 
-		
 }

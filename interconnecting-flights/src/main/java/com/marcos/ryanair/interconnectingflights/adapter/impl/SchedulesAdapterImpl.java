@@ -25,18 +25,18 @@ public class SchedulesAdapterImpl implements SchedulesAdapter {
 
 		int month = jsonNode.get("month").asInt();
 		for (JsonNode dayElement : jsonNode.get("days")) {
-			for (JsonNode flightElement : dayElement.get("flights")) {				
+			for (JsonNode flightElement : dayElement.get("flights")) {
 				int day = dayElement.get("day").asInt();
 
 				LocalDateTime departureDateTime = LocalDateTime.of(LocalDate.of(year, month, day),
-						LocalTime.parse(flightElement.get("departureTime").asText()));				
+						LocalTime.parse(flightElement.get("departureTime").asText()));
 				LocalDateTime arrivalDateTime = LocalDateTime.of(LocalDate.of(year, month, day),
 						LocalTime.parse(flightElement.get("arrivalTime").asText()));
 
 				FlightScheduleDto flightSchedule = new FlightScheduleDto();
 				flightSchedule.setDepartureDateTime(departureDateTime);
 				flightSchedule.setArrivalDateTime(arrivalDateTime);
-				
+
 				flights.add(flightSchedule);
 			}
 		}

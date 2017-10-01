@@ -14,7 +14,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.marcos.ryanair.interconnectingflights.model.Route;
 import com.marcos.ryanair.interconnectingflights.model.dto.RoutesInfoDto;
 import com.marcos.ryanair.interconnectingflights.provider.RoutesDataProvider;
+import com.marcos.ryanair.interconnectingflights.provider.exception.DataProviderException;
 import com.marcos.ryanair.interconnectingflights.service.RoutesService;
+import com.marcos.ryanair.interconnectingflights.service.exception.ServiceException;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "/test-beans.xml" })
@@ -29,28 +31,42 @@ public class RoutesServiceTest {
 	@Test
 	public void routesHelperTest1Stop() {
 
-		String departure = "STN";
+		String departure = "DUB";
 		String arrival = "WRO";
 		int maxStops = 1;
 
-		Map<Integer, List<Route>> routes = routesService.findFlightsWithStops(departure, arrival, maxStops);
+		Map<Integer, List<Route>> routes = null;
+		try {
+			routes = routesService.findFlightsWithStops(departure, arrival, maxStops);
+		} catch (ServiceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return;
+		}
 
 		System.out.println(routes);
 
 		// calculate the possible values semi-manually to test it
-		RoutesInfoDto routesInfoByDeparture = routesDataProvider.getRoutesGroupedByDeparture();
-		RoutesInfoDto routesInfoByArrival = routesDataProvider.getRoutesGroupedByArrival();
+		RoutesInfoDto routesInfoByDeparture;
+		try {
+			routesInfoByDeparture = routesDataProvider.getRoutesGroupedByDeparture();
+			RoutesInfoDto routesInfoByArrival = routesDataProvider.getRoutesGroupedByArrival();
+			
+			Set<String> destinationsFromOrigin = routesInfoByDeparture.getRoutesByDepartureMap().get(departure);
+			Set<String> originsToDestination = routesInfoByArrival.getRoutesByArrivalMap().get(arrival);
 
-		Set<String> destinationsFromOrigin = routesInfoByDeparture.getRoutesByDepartureMap().get(departure);
-		Set<String> originsToDestination = routesInfoByArrival.getRoutesByArrivalMap().get(arrival);
+			boolean direct = destinationsFromOrigin.contains(arrival);
+			destinationsFromOrigin.retainAll(originsToDestination);
+			int possibleFlightsWithStops = destinationsFromOrigin.size();
 
-		boolean direct = destinationsFromOrigin.contains(arrival);
-		destinationsFromOrigin.retainAll(originsToDestination);
-		int possibleFlightsWithStops = destinationsFromOrigin.size();
+			Assert.assertEquals(direct ? maxStops + 1 : maxStops, routes.size());
+			Assert.assertEquals(possibleFlightsWithStops, routes.get(maxStops).size());
 
-		Assert.assertEquals(direct ? maxStops + 1 : maxStops, routes.size());
-		Assert.assertEquals(possibleFlightsWithStops, routes.get(maxStops).size());
-
+		} catch (DataProviderException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		
 	}
 
 	@Test
@@ -60,7 +76,13 @@ public class RoutesServiceTest {
 		String arrival = "WRO";
 		int maxStops = 0;
 
-		Map<Integer, List<Route>> routes = routesService.findFlightsWithStops(departure, arrival, maxStops);
+		Map<Integer, List<Route>> routes = null;
+		try {
+			routes = routesService.findFlightsWithStops(departure, arrival, maxStops);
+		} catch (ServiceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		System.out.println(routes);
 

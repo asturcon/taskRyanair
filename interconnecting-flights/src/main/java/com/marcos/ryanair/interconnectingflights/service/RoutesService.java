@@ -19,9 +19,13 @@ public interface RoutesService {
 	 * given.
 	 * 
 	 * @param departure
+	 *            departure airport.
 	 * @param arrival
+	 *            arrival airport.
 	 * @param maxStops
-	 * @return
+	 *            maximum number of stops allowed
+	 * @return map that groups lists of routes by the number of stops. Key =>
+	 *         number of stops, value => list of routes found.
 	 * @throws ServiceException
 	 */
 	public Map<Integer, List<Route>> findFlightsWithStops(String departure, String arrival, int maxStops)

@@ -3,16 +3,22 @@ package com.marcos.ryanair.interconnectingflights.model;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+/**
+ * Models a leg of a flight.
+ * 
+ * @author mlg
+ *
+ */
 public class Leg implements Serializable {
 
 	private static final long serialVersionUID = -8887400840876314320L;
 
 	private String departureAirport;
-	
+
 	private String arrivalAirport;
-	
+
 	private LocalDateTime departureTime;
-	
+
 	private LocalDateTime arrivalTime;
 
 	public String getDepartureAirport() {
@@ -46,11 +52,11 @@ public class Leg implements Serializable {
 	public void setArrivalTime(LocalDateTime arrivalTime) {
 		this.arrivalTime = arrivalTime;
 	}
-	
+
 	@Override
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
-		
+
 		sb.append(getDepartureAirport());
 		sb.append("-");
 		sb.append(getArrivalAirport());
@@ -58,8 +64,8 @@ public class Leg implements Serializable {
 		sb.append(getDepartureTime());
 		sb.append(" - ");
 		sb.append(getArrivalTime());
-		
+
 		return sb.toString();
 	}
-	
+
 }

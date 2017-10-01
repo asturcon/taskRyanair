@@ -39,17 +39,18 @@ public class FlightsFinderFacadeImpl implements FlightsFinderFacade {
 		Map<Integer, List<Flight>> interconnectingFlights = new HashMap<>();
 		flightsInfo.setInterconnectingFlights(interconnectingFlights);
 
-		// iterate by stops
+		// iterate by stops.
 		for (int stops = 0; stops <= maxStops; stops++) {
 			List<Flight> flights = new ArrayList<>();
 			interconnectingFlights.put(stops, flights);
 
-			// get routes for this number of stops
+			// get routes for this number of stops.
 			List<Route> routes = routesMap.get(stops);
 
 			// iterate over each route
 			for (Route route : routes) {
-				// check schedules for this route
+				// check schedules for this route and find the flights
+				// available.
 				flights.addAll(schedulesService.findRouteFlightsMax1Stop(route, departureDateTime, arrivalDateTime,
 						minTimeStop));
 			}

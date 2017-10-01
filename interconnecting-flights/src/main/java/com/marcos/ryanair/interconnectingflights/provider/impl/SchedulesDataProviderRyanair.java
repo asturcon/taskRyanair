@@ -11,8 +11,8 @@ import com.marcos.ryanair.interconnectingflights.adapter.SchedulesAdapter;
 import com.marcos.ryanair.interconnectingflights.model.dto.SchedulesDto;
 import com.marcos.ryanair.interconnectingflights.provider.RestConnectorManager;
 import com.marcos.ryanair.interconnectingflights.provider.SchedulesDataProvider;
-import com.marcos.ryanair.interconnectingflights.provider.exception.RestConnectionException;
 import com.marcos.ryanair.interconnectingflights.provider.exception.DataProviderException;
+import com.marcos.ryanair.interconnectingflights.provider.exception.RestConnectionException;
 
 /**
  * Implementation of {@link SchedulesDataProvider}:

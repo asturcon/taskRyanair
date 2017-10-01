@@ -1,11 +1,13 @@
 package com.marcos.ryanair.interconnectingflights.view.model;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
-
+/**
+ * Models leg in the view layer.
+ * 
+ * @author mlg
+ *
+ */
 public class LegView implements Serializable {
 
 	private static final long serialVersionUID = -844726589825858347L;
@@ -14,11 +16,9 @@ public class LegView implements Serializable {
 
 	private String arrivalAirport;
 
-	@DateTimeFormat(iso = ISO.DATE)
-	private LocalDateTime departureDateTime;
+	private String departureDateTime;
 
-	@DateTimeFormat(iso = ISO.DATE)
-	private LocalDateTime arrivalDateTime;
+	private String arrivalDateTime;
 
 	public String getDepartureAirport() {
 		return departureAirport;
@@ -36,19 +36,19 @@ public class LegView implements Serializable {
 		this.arrivalAirport = arrivalAirport;
 	}
 
-	public LocalDateTime getDepartureDateTime() {
+	public String getDepartureDateTime() {
 		return departureDateTime;
 	}
 
-	public void setDepartureDateTime(LocalDateTime departureDateTime) {
+	public void setDepartureDateTime(String departureDateTime) {
 		this.departureDateTime = departureDateTime;
 	}
 
-	public LocalDateTime getArrivalDateTime() {
+	public String getArrivalDateTime() {
 		return arrivalDateTime;
 	}
 
-	public void setArrivalDateTime(LocalDateTime arrivalDateTime) {
+	public void setArrivalDateTime(String arrivalDateTime) {
 		this.arrivalDateTime = arrivalDateTime;
 	}
 

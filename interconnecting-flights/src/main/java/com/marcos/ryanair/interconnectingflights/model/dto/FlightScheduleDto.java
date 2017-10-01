@@ -2,8 +2,13 @@ package com.marcos.ryanair.interconnectingflights.model.dto;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
+/**
+ * DTO for flight schedules.
+ * 
+ * @author mlg
+ *
+ */
 public class FlightScheduleDto implements Serializable, Comparable<FlightScheduleDto> {
 
 	private static final long serialVersionUID = 6570382591167181383L;
@@ -11,26 +16,22 @@ public class FlightScheduleDto implements Serializable, Comparable<FlightSchedul
 	private LocalDateTime departureDateTime;
 
 	private LocalDateTime arrivalDateTime;
-	
+
 	public LocalDateTime getDepartureDateTime() {
 		return departureDateTime;
 	}
-
 
 	public void setDepartureDateTime(LocalDateTime departureDateTime) {
 		this.departureDateTime = departureDateTime;
 	}
 
-
 	public LocalDateTime getArrivalDateTime() {
 		return arrivalDateTime;
 	}
 
-
 	public void setArrivalDateTime(LocalDateTime arrivalDateTime) {
 		this.arrivalDateTime = arrivalDateTime;
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -40,7 +41,6 @@ public class FlightScheduleDto implements Serializable, Comparable<FlightSchedul
 		result = prime * result + ((departureDateTime == null) ? 0 : departureDateTime.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -64,14 +64,21 @@ public class FlightScheduleDto implements Serializable, Comparable<FlightSchedul
 		return true;
 	}
 
-
 	@Override
 	public int compareTo(FlightScheduleDto o) {
 		if (o == null) {
 			return 1;
 		}
 
-		return this.departureDateTime.compareTo(o.getDepartureDateTime());
+		if (this.departureDateTime == null && o.getDepartureDateTime() == null) {
+			return 0;
+		} else if (this.departureDateTime == null) {
+			return -1;
+		} else if (o.getDepartureDateTime() == null) {
+			return 1;
+		} else {
+			return this.departureDateTime.compareTo(o.getDepartureDateTime());
+		}
 	}
 
 }

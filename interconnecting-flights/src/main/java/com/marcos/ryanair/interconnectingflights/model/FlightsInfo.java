@@ -4,6 +4,12 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Contains the info about the interconnecting flights.
+ * 
+ * @author mlg
+ *
+ */
 public class FlightsInfo implements Serializable {
 
 	private static final long serialVersionUID = 4843337507789973590L;

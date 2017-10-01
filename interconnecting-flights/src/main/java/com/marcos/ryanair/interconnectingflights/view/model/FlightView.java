@@ -3,12 +3,18 @@ package com.marcos.ryanair.interconnectingflights.view.model;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * Models flight in the view layer.
+ * 
+ * @author mlg
+ *
+ */
 public class FlightView implements Serializable {
 
 	private static final long serialVersionUID = 3545787516124921812L;
 
 	private int stops;
-	
+
 	private List<LegView> legs;
 
 	public int getStops() {
@@ -25,6 +31,6 @@ public class FlightView implements Serializable {
 
 	public void setLegs(List<LegView> legs) {
 		this.legs = legs;
-	}		
-	
+	}
+
 }

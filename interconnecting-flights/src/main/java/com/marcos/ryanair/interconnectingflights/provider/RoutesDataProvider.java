@@ -14,7 +14,7 @@ public interface RoutesDataProvider {
 	/**
 	 * Get routes grouped by the departure airport.
 	 * 
-	 * @return
+	 * @return {@link RoutesInfoDto}
 	 * @throws DataProviderException
 	 */
 	public RoutesInfoDto getRoutesGroupedByDeparture() throws DataProviderException;
@@ -22,7 +22,7 @@ public interface RoutesDataProvider {
 	/**
 	 * Get routes grouped by the arrival airport.
 	 * 
-	 * @return
+	 * @return {@link RoutesInfoDto}
 	 * @throws DataProviderException
 	 */
 	public RoutesInfoDto getRoutesGroupedByArrival() throws DataProviderException;

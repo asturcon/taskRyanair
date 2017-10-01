@@ -4,6 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Models a Flight that contains one or more legs.
+ * 
+ * @author mlg
+ *
+ */
 public class Flight implements Serializable {
 
 	private static final long serialVersionUID = -7859814014524128149L;
@@ -27,12 +33,12 @@ public class Flight implements Serializable {
 	protected void setLegs(List<Leg> legs) {
 		this.legs = legs;
 	}
-	
+
 	public void addLeg(Leg leg) {
 		if (legs == null) {
 			legs = new ArrayList<>();
 		}
-		
+
 		legs.add(leg);
 	}
 

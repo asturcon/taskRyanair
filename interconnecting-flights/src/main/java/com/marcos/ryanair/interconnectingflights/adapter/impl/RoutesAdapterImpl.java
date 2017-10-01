@@ -44,7 +44,7 @@ public class RoutesAdapterImpl implements RoutesAdapter {
 
 	@Override
 	public RoutesInfoDto adaptRoutesByArrival(JsonNode json) {
-		
+
 		Map<String, Set<String>> originsByDestinationMap = new HashMap<>();
 
 		for (JsonNode element : json) {
