@@ -1,7 +1,7 @@
-package com.marcos.ryanair.interconnectingflights.adapter;
+package com.marcos.ryanair.interconnectingflights.service.adapter;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.marcos.ryanair.interconnectingflights.model.dto.SchedulesDto;
+import com.marcos.ryanair.interconnectingflights.service.dto.SchedulesDto;
 
 /**
  * Schedules adapter.

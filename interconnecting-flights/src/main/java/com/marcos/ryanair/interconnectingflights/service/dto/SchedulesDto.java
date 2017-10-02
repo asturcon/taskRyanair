@@ -1,4 +1,4 @@
-package com.marcos.ryanair.interconnectingflights.model.dto;
+package com.marcos.ryanair.interconnectingflights.service.dto;
 
 import java.util.SortedSet;
 

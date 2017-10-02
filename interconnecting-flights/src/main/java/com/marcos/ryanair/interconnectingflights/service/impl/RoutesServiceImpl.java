@@ -10,10 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.marcos.ryanair.interconnectingflights.model.Route;
-import com.marcos.ryanair.interconnectingflights.model.dto.RoutesInfoDto;
 import com.marcos.ryanair.interconnectingflights.provider.RoutesDataProvider;
 import com.marcos.ryanair.interconnectingflights.provider.exception.DataProviderException;
 import com.marcos.ryanair.interconnectingflights.service.RoutesService;
+import com.marcos.ryanair.interconnectingflights.service.dto.RoutesInfoDto;
 import com.marcos.ryanair.interconnectingflights.service.exception.ServiceException;
 
 @Service("routesService")
@@ -44,7 +44,7 @@ public final class RoutesServiceImpl implements RoutesService {
 		return allRoutes;
 	}
 
-	private static void findFlightsWithStopsRecursive(RoutesInfoDto routesInfo, String departure, String arrival,
+	private void findFlightsWithStopsRecursive(RoutesInfoDto routesInfo, String departure, String arrival,
 			int stops, int maxStops, List<String> route, Map<Integer, List<Route>> allRoutes) {
 
 		route.add(departure);
@@ -79,7 +79,7 @@ public final class RoutesServiceImpl implements RoutesService {
 	/**
 	 * Adds a route to the routes by stops map.
 	 */
-	private static void addRoute(List<String> route, Map<Integer, List<Route>> allRoutes, int stops) {
+	private void addRoute(List<String> route, Map<Integer, List<Route>> allRoutes, int stops) {
 		List<Route> routesStop = allRoutes.get(stops);
 		if (routesStop == null) {
 			routesStop = new ArrayList<>();

@@ -18,12 +18,12 @@ import org.springframework.stereotype.Service;
 import com.marcos.ryanair.interconnectingflights.model.Flight;
 import com.marcos.ryanair.interconnectingflights.model.Leg;
 import com.marcos.ryanair.interconnectingflights.model.Route;
-import com.marcos.ryanair.interconnectingflights.model.dto.ComparatorFlightScheduleDtoByArrivalDateTime;
-import com.marcos.ryanair.interconnectingflights.model.dto.FlightScheduleDto;
-import com.marcos.ryanair.interconnectingflights.model.dto.SchedulesDto;
 import com.marcos.ryanair.interconnectingflights.provider.SchedulesDataProvider;
 import com.marcos.ryanair.interconnectingflights.provider.exception.DataProviderException;
 import com.marcos.ryanair.interconnectingflights.service.SchedulesService;
+import com.marcos.ryanair.interconnectingflights.service.dto.ComparatorFlightScheduleDtoByArrivalDateTime;
+import com.marcos.ryanair.interconnectingflights.service.dto.FlightScheduleDto;
+import com.marcos.ryanair.interconnectingflights.service.dto.SchedulesDto;
 
 @Service("schedulesService")
 public class SchedulesServiceImpl implements SchedulesService {

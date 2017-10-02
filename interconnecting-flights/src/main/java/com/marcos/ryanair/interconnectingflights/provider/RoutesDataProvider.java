@@ -1,7 +1,7 @@
 package com.marcos.ryanair.interconnectingflights.provider;
 
-import com.marcos.ryanair.interconnectingflights.model.dto.RoutesInfoDto;
 import com.marcos.ryanair.interconnectingflights.provider.exception.DataProviderException;
+import com.marcos.ryanair.interconnectingflights.service.dto.RoutesInfoDto;
 
 /**
  * Defines the methods to interact with the routes data provider.

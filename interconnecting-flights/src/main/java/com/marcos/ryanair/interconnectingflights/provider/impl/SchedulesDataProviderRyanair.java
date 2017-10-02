@@ -7,12 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.marcos.ryanair.interconnectingflights.adapter.SchedulesAdapter;
-import com.marcos.ryanair.interconnectingflights.model.dto.SchedulesDto;
 import com.marcos.ryanair.interconnectingflights.provider.RestConnectorManager;
 import com.marcos.ryanair.interconnectingflights.provider.SchedulesDataProvider;
 import com.marcos.ryanair.interconnectingflights.provider.exception.DataProviderException;
 import com.marcos.ryanair.interconnectingflights.provider.exception.RestConnectionException;
+import com.marcos.ryanair.interconnectingflights.service.adapter.SchedulesAdapter;
+import com.marcos.ryanair.interconnectingflights.service.dto.SchedulesDto;
 
 /**
  * Implementation of {@link SchedulesDataProvider}:

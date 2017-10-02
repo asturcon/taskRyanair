@@ -1,4 +1,4 @@
-package com.marcos.ryanair.interconnectingflights.adapter.impl;
+package com.marcos.ryanair.interconnectingflights.service.adapter.impl;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -8,8 +8,8 @@ import java.util.Set;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.marcos.ryanair.interconnectingflights.adapter.RoutesAdapter;
-import com.marcos.ryanair.interconnectingflights.model.dto.RoutesInfoDto;
+import com.marcos.ryanair.interconnectingflights.service.adapter.RoutesAdapter;
+import com.marcos.ryanair.interconnectingflights.service.dto.RoutesInfoDto;
 
 @Component("routesAdapter")
 public class RoutesAdapterImpl implements RoutesAdapter {

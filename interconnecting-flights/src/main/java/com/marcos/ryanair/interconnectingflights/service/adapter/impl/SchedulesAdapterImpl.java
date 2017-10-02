@@ -1,4 +1,4 @@
-package com.marcos.ryanair.interconnectingflights.adapter.impl;
+package com.marcos.ryanair.interconnectingflights.service.adapter.impl;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -9,9 +9,9 @@ import java.util.TreeSet;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.marcos.ryanair.interconnectingflights.adapter.SchedulesAdapter;
-import com.marcos.ryanair.interconnectingflights.model.dto.FlightScheduleDto;
-import com.marcos.ryanair.interconnectingflights.model.dto.SchedulesDto;
+import com.marcos.ryanair.interconnectingflights.service.adapter.SchedulesAdapter;
+import com.marcos.ryanair.interconnectingflights.service.dto.FlightScheduleDto;
+import com.marcos.ryanair.interconnectingflights.service.dto.SchedulesDto;
 
 @Component("schedulesAdapter")
 public class SchedulesAdapterImpl implements SchedulesAdapter {

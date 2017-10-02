@@ -12,10 +12,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.marcos.ryanair.interconnectingflights.model.Route;
-import com.marcos.ryanair.interconnectingflights.model.dto.RoutesInfoDto;
 import com.marcos.ryanair.interconnectingflights.provider.RoutesDataProvider;
 import com.marcos.ryanair.interconnectingflights.provider.exception.DataProviderException;
 import com.marcos.ryanair.interconnectingflights.service.RoutesService;
+import com.marcos.ryanair.interconnectingflights.service.dto.RoutesInfoDto;
 import com.marcos.ryanair.interconnectingflights.service.exception.ServiceException;
 
 @RunWith(SpringJUnit4ClassRunner.class)
